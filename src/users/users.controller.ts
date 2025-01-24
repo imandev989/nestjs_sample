@@ -11,7 +11,6 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
 import { UpdateUserDto } from './dto/create-user.dto/update-user.dto';
-import { CustomPipe } from 'src/pipes/custom/custom.pipe';
 import { MobilePipe } from 'src/pipes/validate/mobile/mobile.pipe';
 
 @Controller('users')
