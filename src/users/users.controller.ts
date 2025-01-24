@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
@@ -26,7 +27,7 @@ export class UsersController {
   }
 
   @Post()
-  store(@Body() createUserDto: CreateUserDto) {
+  store(@Body(new ValidationPipe()) createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
 
