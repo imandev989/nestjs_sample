@@ -4,13 +4,14 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
-  ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
 import { UpdateUserDto } from './dto/create-user.dto/update-user.dto';
+import { CustomPipe } from 'src/pipes/custom/custom.pipe';
 
 @Controller('users')
 export class UsersController {
@@ -22,12 +23,12 @@ export class UsersController {
   }
 
   @Get('/:id')
-  get(@Param('id') id: string) {
-    return this.usersService.getById(parseInt(id));
+  get(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.getById(id);
   }
 
   @Post()
-  store(@Body() createUserDto: CreateUserDto) {
+  store(@Body(new CustomPipe()) createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
 
