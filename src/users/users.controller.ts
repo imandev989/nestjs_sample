@@ -1,22 +1,41 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
+import { UpdateUserDto } from './dto/create-user.dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Get()
   index(): object {
-    return this.usersService.getAll()
+    return this.usersService.getAll();
   }
 
-  @Get("/:id")
+  @Get('/:id')
   get(@Param('id') id: string) {
-    return this.usersService.getById(parseInt(id))
+    return this.usersService.getById(parseInt(id));
   }
 
   @Post()
-  store(@Body() data: object) {
-    return this.usersService.createUser(data)
+  store(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.createUser(createUserDto);
+  }
+
+  @Put('/:id')
+  updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.updateUser(parseInt(id), updateUserDto);
+  }
+  @Delete('/:id')
+  destroy(@Param('id') id: string): object {
+    return this.usersService.deleteUser(parseInt(id));
   }
 }
