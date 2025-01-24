@@ -12,6 +12,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
 import { UpdateUserDto } from './dto/create-user.dto/update-user.dto';
 import { CustomPipe } from 'src/pipes/custom/custom.pipe';
+import { MobilePipe } from 'src/pipes/validate/mobile/mobile.pipe';
 
 @Controller('users')
 export class UsersController {
@@ -28,7 +29,7 @@ export class UsersController {
   }
 
   @Post()
-  store(@Body(new CustomPipe()) createUserDto: CreateUserDto) {
+  store(@Body(new MobilePipe(11)) createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
 
