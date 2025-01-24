@@ -27,7 +27,7 @@ export class UsersController {
   }
 
   @Post()
-  store(@Body(new ValidationPipe()) createUserDto: CreateUserDto) {
+  store(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
 
