@@ -13,6 +13,7 @@ import { UsersModule } from './users/users.module';
       password: 'imaniman',
       database: 'user_manage',
       synchronize: true,
+      entities: [__dirname + '../**/entities/*.entity{.ts,.js}'],
     }),
   ],
   controllers: [],
