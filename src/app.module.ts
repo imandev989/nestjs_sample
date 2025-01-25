@@ -12,6 +12,7 @@ import { UsersModule } from './users/users.module';
       username: 'root',
       password: 'imaniman',
       database: 'user_manage',
+      synchronize: true,
     }),
   ],
   controllers: [],
