@@ -42,16 +42,8 @@ export class UsersService {
   updateUser(id: number, updateUserDto: UpdateUserDto): Promise<object> {
     return this.userRepository.update({ id: id }, updateUserDto)
   }
-  
-  deleteUser(id: number): object {
-    const newUser: object[] = [];
-    for (const user of this.users) {
-      if (user.id !== id) newUser.push(user);
-    }
-    return {
-      data: newUser,
-      statusCode: 200,
-      message: 'user deleted!',
-    };
+
+  deleteUser(id: number): Promise<any> {
+    return this.userRepository.delete(id)
   }
 }
