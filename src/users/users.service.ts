@@ -10,7 +10,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) {}
+  ) { }
   private users: any[] = [
     {
       id: 1,
@@ -26,35 +26,17 @@ export class UsersService {
     },
   ];
 
-  getAll(): any {
-    return {
-      data: this.users,
-      statusCode: 200,
-      message: 'Get All users',
-    };
+  getAll(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
-  getById(id: number): object {
-    let findUser = null;
-    for (const user of this.users) {
-      if (user.id == id) findUser = user;
-    }
-    return {
-      data: findUser,
-      statusCode: 200,
-      message: 'Get User!',
-    };
+  getById(id: number): Promise<User> {
+    return this.userRepository.findOneByOrFail({ id: id })
   }
 
-  createUser(createUserDto: CreateUserDto): object {
-    if (createUserDto) {
-      this.users.push(createUserDto);
-    }
-    return {
-      data: this.users,
-      statusCode: 200,
-      message: 'created user!',
-    };
+  createUser(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = this.userRepository.create(createUserDto)
+    return this.userRepository.save(newUser)
   }
 
   updateUser(id: number, updateUserDto: UpdateUserDto) {

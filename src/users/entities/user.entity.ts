@@ -6,6 +6,8 @@ export class User {
   id: number;
   @Column()
   name: string;
+  @Column()
+  mobile: string;
   @Column({ default: false })
   isActive: boolean;
 }
