@@ -15,7 +15,7 @@ import { MobilePipe } from 'src/pipes/validate/mobile/mobile.pipe';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Get()
   index(): object {
@@ -33,8 +33,9 @@ export class UsersController {
   }
 
   @Put('/:id')
-  updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.updateUser(parseInt(id), updateUserDto);
+  async updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    const updateUser = await this.usersService.updateUser(parseInt(id), updateUserDto);
+    return null
   }
   @Delete('/:id')
   destroy(@Param('id') id: string): object {

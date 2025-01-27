@@ -39,25 +39,10 @@ export class UsersService {
     return this.userRepository.save(newUser)
   }
 
-  updateUser(id: number, updateUserDto: UpdateUserDto) {
-    let findUser = null;
-    for (const user of this.users) {
-      if (user.id == id) findUser = user;
-    }
-    if (findUser) {
-      findUser.username = updateUserDto.username;
-      return {
-        data: findUser,
-        statusCode: 200,
-        message: 'user Update!',
-      };
-    } else
-      return {
-        updateUserDto: null,
-        statusCode: 404,
-        message: 'User not found!',
-      };
+  updateUser(id: number, updateUserDto: UpdateUserDto): Promise<object> {
+    return this.userRepository.update({ id: id }, updateUserDto)
   }
+  
   deleteUser(id: number): object {
     const newUser: object[] = [];
     for (const user of this.users) {
